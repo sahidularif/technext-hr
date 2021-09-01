@@ -1,0 +1,39 @@
+:root {
+  --primaryColor: #028090;
+  --secondaryColor: #e4fde1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; 
+  overflow-x: hidden;
+}
+
+.text {
+  padding: 2rem;
+}
+
+.content img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .content img {
+    width: 100%;
+  }
+}

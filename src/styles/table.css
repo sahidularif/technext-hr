@@ -1,0 +1,12 @@
+.table-header{
+  background-color: #F1F1F1;
+  justify-content:space-between;
+  align-items: center;
+  padding: 10px 0;
+  color: #5A5278;
+}
+  
+  img {
+    width: 1.5rem;
+  }
+  

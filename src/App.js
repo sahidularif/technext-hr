@@ -1,15 +1,24 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
-import DragAndDrop from './component/DragAndDrop'
+import Employee from './component/Employee';
+import Home from './component/Home';
 
 function App() {
   return (
-        <div>
-        <p className="title">React Drag and Drop Image Upload</p>
-        <div className="content">
-          <DragAndDrop/>
-        </div>
-    </div>
-      
+    <>
+      <Router>
+        <Switch>
+          <Route exact path='/addEmployee' component={Home}></Route>
+          <Route exact path='/' component={Employee}></Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 

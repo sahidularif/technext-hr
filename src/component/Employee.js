@@ -23,7 +23,7 @@ const Employee = () => {
                     }
                 })
                 setEmployees({ employees });
-                console.log(employees);
+                // console.log(employees);
             });
     }, []);
 
@@ -38,9 +38,9 @@ const Employee = () => {
                     <div className="row justify-content-end main-container gx-0">
                         <div className="header">
                             <a href="#default" className="logo">Employees</a>
-                            <div className="header-right">
+                            {/* <div className="header-right">
                                 <a className="active" href="#home">LOG OUT</a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="row m-0 p-0 justify-content-center mt-5">

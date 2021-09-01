@@ -9,6 +9,9 @@ const Dropzone = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [invalidFileMsg, setInvalidFileMsg] = useState('');
   const [highlighted, setHighlighted] = useState(false);
+  const [inserted, setInserted] = useState(0);
+  const [skipped, setSkipped] = useState(0);
+  const [success, setSuccess] = useState(false);
 
   // ::::::::::HANDLE DRAG & DROP:::::::::::::
 
@@ -82,12 +85,15 @@ const Dropzone = () => {
           transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
         });
         let rows = data.data;
-        console.log("data:", rows);
+        // console.log("data:", rows);
         let employes = [];
         const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         employes = rows.filter((row) => row.first_name != null && (pattern.test(row.email.toLowerCase())));
-        console.log(employes);
-
+        // console.log(employes);
+        let insertedRecord = employes.length;
+        let skipeedRecord = rows.length - employes.length;
+        setInserted(insertedRecord)
+        setSkipped(skipeedRecord);
         handleInsertToDatabase(employes);
       };
       reader.onerror = function () {
@@ -98,13 +104,16 @@ const Dropzone = () => {
 
   const handleInsertToDatabase = (data) => {
     let insertData = JSON.stringify(data);
-    fetch("http://localhost:9000/bulkcreate", {
+    fetch("https://immense-sea-72965.herokuapp.com/bulkcreate", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: insertData,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setSuccess(true);
+        // console.log(data)
+      });
   };
 
 
@@ -132,9 +141,17 @@ const Dropzone = () => {
             />
           </form>
         </div>
-        <h5>
-
-        </h5>
+        <div className="">
+          {
+            success &&
+            <>
+              <div className="col-md-8 alert alert-success" role="alert">
+                <span><i class="fas fa-check-circle"></i> {inserted} Employee successfully added!</span><br/>
+                <span><i class="fas fa-exclamation-triangle"></i> {skipped} Employee successfully added!</span>
+              </div>
+            </>
+          }
+        </div>
 
       </div>
     </>

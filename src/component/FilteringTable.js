@@ -1,16 +1,18 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useRowSelect, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { Jumbotron, Col, InputGroup, FormControl, Row, Table, Form, Container, Button } from 'react-bootstrap';
 import { COLUMNS } from "./column";
 import '../styles/table.css';
-import { GlobalFilter } from "./GlobalFilter"
 import Mail from './Mail';
 
-
-// set up a component for the table that will take in and display the employee information
 const FilteringTable = (props) => {
+    const [email, setEmail] = useState({});
+    useEffect(()=>{
+       
+        setEmail(selectedFlatRows)
 
-
+    })
+console.log(email)
     const IndeterminateCheckbox = React.forwardRef(
         ({ indeterminate, ...rest }, ref) => {
             const defaultRef = React.useRef()
@@ -22,7 +24,7 @@ const FilteringTable = (props) => {
 
             return (
                 <>
-                    <input type="checkbox" ref={resolvedRef} {...rest} /> Select All
+                    <input type="checkbox" ref={resolvedRef} {...rest} /> Select
                 </>
             )
         }
@@ -110,7 +112,7 @@ const FilteringTable = (props) => {
                     </Form>
                 </div>
                 <div className="col-md-4">
-                    <Mail />
+                    <Mail selectedFlatRows={selectedFlatRows} />
                 </div>
             </div>
             <table {...getTableProps()} className="table table-striped table-hover">
@@ -179,21 +181,16 @@ const FilteringTable = (props) => {
                     <button className="btn btn-sm btn-outline-secondary" onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                     <button className="btn btn-sm btn-outline-secondary" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
                 </div>
-                <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-                <pre>
-                    <code>
-                        {/* {JSON.stringify(
-                            {
-                                selectedRowIds: selectedRowIds,
-                                'selectedFlatRows[].original': selectedFlatRows.map(
-                                    d => d.original
-                                ),
-                            },
-                            null,
-                            2
-                        )} */}
-                    </code>
-                </pre>
+                {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p> */}
+
+                <span>
+                    {/* {
+                        selectedFlatRows.map(
+                            d => d.original.email
+                        )
+                    } */}
+                </span>
+
             </div>
 
         </>

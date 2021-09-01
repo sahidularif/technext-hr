@@ -4,7 +4,9 @@ import './Home.css';
 import Dropzone from './Dropzone';
 import SideNav from './SideNav';
 //::::::::::::::::::::::::::::::::::::::::::::
+
 const Home = () => {
+    const [success, setSuccess] = useState(false)
     const [employee, setEmployee] = useState({});
     const { register, handleSubmit, watch, formState: { errors }
     } = useForm();
@@ -12,14 +14,18 @@ const Home = () => {
     // When form submitted:
     const onSubmit = (data) => {
         let employee = JSON.stringify(data);
-        console.log(data)
-        fetch("http://localhost:9000/customers", {
+        // console.log(data)
+        fetch("https://immense-sea-72965.herokuapp.com/customers", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: employee,
         })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                setSuccess(true);
+                // console.log(data)
+                // console.log((success));
+            });
     };
 
 
@@ -32,17 +38,21 @@ const Home = () => {
                 <div className="col-md-9 right-side">
                     <div className="row justify-content-end main-container gx-0">
                         <div className="header">
-                            <a href="#default" className="logo">Add Employee</a>
-                            <div className="header-right">
+                            <a href="/" className="logo">Add Employee</a>
+                            {/* <div className="header-right">
                                 <a className="active" href="#home">LOG OUT</a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
                     <div className="row justify-content-center mt-3">
-                        <div className="col-md-8 alert alert-success" role="alert">
-                            <i class="fas fa-check-circle"></i> Employee successfully inserted!
-                        </div>
+                        {
+                            success ? (
+                                <div className="col-md-8 alert alert-success" role="alert">
+                                    <span><i class="fas fa-check-circle"></i> Employee successfully added!</span>
+                                </div>
+                            ) : ''
+                        }
                     </div>
                     <div className="row m-0 p-0 justify-content-center mt-5">
                         <div className="col-md-10 entry-form p-5">

@@ -19,8 +19,7 @@ const SideNav = () => {
                     <i class="fas fa-user-shield"></i> <b>HRMS</b>
                         <ul>
                             <li><Link to="/">Employees</Link></li>
-                            <li><Link to="/addEmployee">Add Employee</Link></li>
-                            <li>Mail2Employee</li>
+                            <li><Link to="/addEmployee">Add Employee</Link></li>                            
                         </ul>
                     </li>
                     
